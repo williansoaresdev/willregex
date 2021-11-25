@@ -7,13 +7,25 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="./willregex.js"></script>
 </head>
 <body> 
 
 <div class="container">
-  <h2>Well</h2>
-  <div class="well">Welcome to my RegExp examples!</div>
+    <h2>WillRegEx</h2>
+    <div class="well">
+        Welcome to my RegExp examples!
+        <small id="smlVersion"></small>
+    </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+
+        $("#smlVersion").html("Version: " + willRegEx.classVersion());
+
+    });
+</script>
 
 </body>
 </html>
