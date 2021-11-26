@@ -6,7 +6,7 @@ function WillRegEx() {
 
     /* Some necessary expressions */
     this.constants = {
-        NO_PROCCESS = 'Nothing processed'
+        NO_PROCCESS: 'Nothing processed'
     }
 
     /* Store the last error found */
