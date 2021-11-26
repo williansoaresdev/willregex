@@ -14,15 +14,35 @@
 <div class="container">
     <h2>WillRegEx</h2>
     <div class="well">
-        Welcome to my RegExp examples!
+        Welcome to my RegExp examples!<br />
         <small id="smlVersion"></small>
+    </div>
+    <div class="well">
+        <div>
+            <input type="text" id="edtOnlyNumbers" class="form-control" placeholder="Only numbers accepted here" />
+        </div>
+        <div>
+            <small id="smlOnlyNumbers">Waiting...</small>
+        </div>
     </div>
 </div>
 
 <script>
     $(document).ready(function(){
 
+        /* Shows the class version */
         $("#smlVersion").html("Version: " + willRegEx.classVersion());
+
+        /* Prepare the only numbers validation */
+        $("#edtOnlyNumbers").keyup(function(){
+
+            let xRes   = (willRegEx.onlyNumbers($("#edtOnlyNumbers").val()));
+            let xColor = (xRes) ? 'success' : 'danger';
+            let xExpr  = (xRes) ? 'Passed!' : 'Fail, ' + willRegEx.getLastError() + '!';
+
+            $("#smlOnlyNumbers").html("Result: <span class='label label-"+xColor+"'>"+xExpr+"</span>");
+
+        });
 
     });
 </script>
