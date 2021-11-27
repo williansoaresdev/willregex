@@ -4,8 +4,12 @@
 
 function WillRegEx() {
 
+    /* Allow to fail if the content to test is empty */
+    this.failIfIsEmpty = true;
+
     /* Some necessary expressions */
     this.constants = {
+        EMPTY_VALUE: 'Empty content. Type something',
         NO_ERROR: '',
         NO_NUMBERS: 'Only numbers from 0 to 9 was expected',
         NO_PROCCESS: 'Nothing processed'
@@ -27,6 +31,12 @@ function WillRegEx() {
     /* ONLY NUMBERS regexp validation */
     this.onlyNumbers = function(content) {
         this.lastError = this.constants.NO_PROCCESS;
+
+        /* Check the is empty property */
+        if (this.failIfIsEmpty && (content == "")) {
+            this.lastError = this.constants.EMPTY_VALUE;
+            return false;
+        }
 
         /* RegExp for macth when find something is not a number */
         const re = /[^0-9]/;

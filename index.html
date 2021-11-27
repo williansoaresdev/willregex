@@ -33,15 +33,16 @@
         /* Shows the class version */
         $("#smlVersion").html("Version: " + willRegEx.classVersion());
 
+        /* RegExp analisis */
+        regexCall = function(regExResult, lblLabel) {
+            let xColor = (regExResult) ? 'success' : 'danger';
+            let xExpr  = (regExResult) ? 'Passed!' : 'Fail, ' + willRegEx.getLastError() + '!';
+            $("#"+lblLabel).html("Result: <span class='label label-"+xColor+"'>"+xExpr+"</span>");
+        }
+
         /* Prepare the only numbers validation */
         $("#edtOnlyNumbers").keyup(function(){
-
-            let xRes   = (willRegEx.onlyNumbers($("#edtOnlyNumbers").val()));
-            let xColor = (xRes) ? 'success' : 'danger';
-            let xExpr  = (xRes) ? 'Passed!' : 'Fail, ' + willRegEx.getLastError() + '!';
-
-            $("#smlOnlyNumbers").html("Result: <span class='label label-"+xColor+"'>"+xExpr+"</span>");
-
+            regexCall(willRegEx.onlyNumbers($("#edtOnlyNumbers").val()), "smlOnlyNumbers");
         });
 
     });
