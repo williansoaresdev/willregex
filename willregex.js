@@ -33,7 +33,7 @@ function WillRegEx() {
         const haveOtherSymbols = re.test(content); /* test the expression */
 
         /* Apply the correct message error */
-        this.lastError = (haveOtherSymbols) ? NO_NUMBERS : NO_ERROR;
+        this.lastError = (haveOtherSymbols) ? this.constants.NO_NUMBERS : this.constants.NO_ERROR;
 
         /* Returns the result */
         return (!haveOtherSymbols);
