@@ -6,6 +6,8 @@ function WillRegEx() {
 
     /* Some necessary expressions */
     this.constants = {
+        NO_ERROR: '',
+        NO_NUMBERS: 'Only numbers from 0 to 9 was expected',
         NO_PROCCESS: 'Nothing processed'
     }
 
@@ -26,7 +28,15 @@ function WillRegEx() {
     this.onlyNumbers = function(content) {
         this.lastError = this.constants.NO_PROCCESS;
 
-        return false;
+        /* RegExp for macth when find something is not a number */
+        const re = /[^0-9]/;
+        const haveOtherSymbols = re.test(content); /* test the expression */
+
+        /* Apply the correct message error */
+        this.lastError = (haveOtherSymbols) ? NO_NUMBERS : NO_ERROR;
+
+        /* Returns the result */
+        return (!haveOtherSymbols);
     }
 
     /* --- create routine --- */
