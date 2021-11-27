@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>RegExp Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -18,8 +18,13 @@
         <small id="smlVersion"></small>
     </div>
     <div class="well">
-        <div>
-            <input type="text" id="edtOnlyNumbers" class="form-control" placeholder="Only numbers accepted here" />
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" id="edtOnlyNumbers" class="form-control" placeholder="Only numbers accepted here" />
+            </div>
+            <div class="col-md-6">
+                <input type="text" id="expOnlyNumbers" class="form-control" value="Code" />
+            </div>
         </div>
         <div>
             <small id="smlOnlyNumbers">Waiting...</small>
@@ -44,6 +49,7 @@
         $("#edtOnlyNumbers").keyup(function(){
             regexCall(willRegEx.onlyNumbers($("#edtOnlyNumbers").val()), "smlOnlyNumbers");
         });
+        $("#expOnlyNumbers").val(willRegEx.onlyNumbers('', willRegEx.constants.RETURN_EXPR));
 
     });
 </script>
