@@ -13,6 +13,11 @@ function WillRegEx() {
         RETURN_EXPR: 'expr'
     }
 
+    /* All the RegExp used */
+    this.expressions = {
+        ONLY_NUMBERS: /[^0-9]/
+    }
+
     /* Allow to fail if the content to test is empty */
     this.failIfIsEmpty = true;
 
@@ -33,7 +38,7 @@ function WillRegEx() {
     }
 
     /* ONLY NUMBERS regexp validation */
-    this.onlyNumbers = function(content, returnExpr) {
+    this.onlyNumbers = function(content) {
         this.lastError = this.constants.NO_PROCCESS;
 
         /* Check the is empty property */
@@ -43,8 +48,7 @@ function WillRegEx() {
         }
 
         /* RegExp for macth when find something is not a number */
-        const re = /[^0-9]/;
-        const haveOtherSymbols = re.test(content); /* test the expression */
+        const haveOtherSymbols = this.expressions.ONLY_NUMBERS.test(content); /* test the expression */
 
         /* Apply the correct message error */
         this.lastError = (haveOtherSymbols) ? this.constants.NO_NUMBERS : this.constants.NO_ERROR;
@@ -52,8 +56,12 @@ function WillRegEx() {
         /* Match result */
         this.matchResult = (!haveOtherSymbols);
 
-        /* Returns the result (expression or match) */
-        return (returnExpr) ? re.toString() : this.matchResult;
+        return this.matchResult;
+    }
+
+    /* Returns the expression as a String */
+    this.onlyNumbersToString = function() {
+        return this.expressions.ONLY_NUMBERS.toString();
     }
 
     /* --- create routine --- */
