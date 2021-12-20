@@ -10,12 +10,14 @@ function WillRegEx() {
         NO_CAPITAL: 'Please begin the expression with capital letter',
         NO_ERROR: '',
         NO_NUMBERS: 'Only numbers from 0 to 9 was expected',
+        NO_PONCTUATION: 'Please finish the expression with a ponctuation',
         NO_PROCCESS: 'Nothing processed',
         RETURN_EXPR: 'expr'
     }
 
     /* All the RegExp used */
     this.expressions = {
+        END_PONCTUATION: /[\.!?]$/,
         INITIAL_CAPITAL_LETTER: /^[A-Z]/,
         ONLY_NUMBERS: /[^0-9]/
     }
@@ -37,6 +39,30 @@ function WillRegEx() {
     /* Returns the last error found */
     this.getLastError = function() {
         return this.lastError;
+    }
+
+    /* END PONCTUATION validation */
+    this.endPonctuation = function(content) {
+        this.lastError = this.constants.NO_PROCCESS;
+
+        /* Check the is empty property */
+        if (this.failIfIsEmpty && (content == "")) {
+            this.lastError = this.constants.EMPTY_VALUE;
+            return false;
+        }
+
+        /* Check if the expression ends with ponctuation */
+        this.matchResult = (this.expressions.END_PONCTUATION.test(content));
+
+        /* Apply the correct message error */
+        this.lastError = (this.matchResult) ? this.constants.NO_ERROR : this.constants.NO_PONCTUATION;;
+
+        return this.matchResult;        
+    }
+
+    /* Returns the expression as a String */
+    this.endPonctuationToString = function() {
+        return this.expressions.END_PONCTUATION.toString();
     }
 
     /* INITIAL CAPITAL LETTER validation */

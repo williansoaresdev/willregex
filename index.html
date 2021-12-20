@@ -79,6 +79,14 @@
           willRegEx.initialCapitalLetterToString()
         );
 
+        /* Prepare the final pontuation validation */
+        buildNewInput("EndPonctuation", "End sentence with punctuation",
+          function(){
+            regexCall(willRegEx.endPonctuation($("#edtEndPonctuation").val()), "smlEndPonctuation");
+          },
+          willRegEx.endPonctuationToString()
+        );
+
     });
 </script>
 
