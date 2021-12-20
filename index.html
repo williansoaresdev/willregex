@@ -22,8 +22,12 @@
         <small id="smlVersion"></small>
     </div>
 
+    <div id="divFormInputs">
+        <!-- The form inputs for validations will appear here -->
+    </div>
+
     <!-- Block por Only Numbers validation -->
-    <div class="well">
+<!--    <div class="well">
         <div class="row">
             <div class="col-md-6">
                 <input type="text" id="edtOnlyNumbers" class="form-control" placeholder="Only numbers accepted here" />
@@ -35,10 +39,10 @@
         <div>
             <small id="smlOnlyNumbers">Waiting...</small>
         </div>
-    </div>
+    </div> -->
 
     <!-- Block for Initial Capital Letter -->
-    <div class="well">
+<!--    <div class="well">
         <div class="row">
             <div class="col-md-6">
                 <input type="text" id="edtCapitalLetter" class="form-control" placeholder="Only initial capital letter here" />
@@ -50,7 +54,7 @@
         <div>
             <small id="smlCapitalLetter">Waiting...</small>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <script>
@@ -59,24 +63,61 @@
         /* Shows the class version */
         $("#smlVersion").html("Version: " + willRegEx.classVersion());
 
-        /* RegExp analisis */
+        /* RegExp analysis */
         regexCall = function(regExResult, lblLabel) {
             let xColor = (regExResult) ? 'success' : 'danger';
             let xExpr  = (regExResult) ? 'Passed!' : 'Fail, ' + willRegEx.getLastError() + '!';
             $("#"+lblLabel).html("Result: <span class='label label-"+xColor+"'>"+xExpr+"</span>");
         }
 
+        /* Form input builder */
+        buildNewInput = function(suffix, description, keyUpEvent, regExExample) {
+            var htmlInput = "";
+            htmlInput += "<div class='well'>";
+            htmlInput += "  <div class='row'>";
+            htmlInput += "    <div class='col-md-6'>";
+            htmlInput += "      <input type='text' id='edt"+suffix+"' class='form-control' placeholder='"+description+"' />";
+            htmlInput += "    </div>";
+            htmlInput += "    <div class='col-md-6'>";
+            htmlInput += "      <input type='text' id='exp"+suffix+"' disabled class='form-control' value='Code' />";
+            htmlInput += "    </div>";
+            htmlInput += "  </div>";
+            htmlInput += "  <div>";
+            htmlInput += "      <small id='sml"+suffix+"'>Waiting...</small>";
+            htmlInput += "  </div>";
+            htmlInput += "</div>";
+
+            $("#divFormInputs").append(htmlInput);
+            $("#edt"+suffix).keyup(keyUpEvent);
+            $("#exp"+suffix).val(regExExample);
+        }
+
         /* Prepare the only numbers validation */
-        $("#edtOnlyNumbers").keyup(function(){
+        buildNewInput("OnlyNumbers", "Only numbers are accepted here",
+          function(){
+            regexCall(willRegEx.onlyNumbers($("#edtOnlyNumbers").val()), "smlOnlyNumbers");
+          },
+          willRegEx.onlyNumbersToString()
+        );
+
+
+        /*$("#edtOnlyNumbers").keyup(function(){
             regexCall(willRegEx.onlyNumbers($("#edtOnlyNumbers").val()), "smlOnlyNumbers");
         });
-        $("#expOnlyNumbers").val(willRegEx.onlyNumbersToString());
+        $("#expOnlyNumbers").val(willRegEx.onlyNumbersToString());*/
 
         /* Prepare the initial capital letter validation */
-        $("#edtCapitalLetter").keyup(function(){
+        buildNewInput("CapitalLetter", "Only initial capital letter here",
+          function(){
+            regexCall(willRegEx.onlyNumbers($("#edtCapitalLetter").val()), "smlCapitalLetter");
+          },
+          willRegEx.initialCapitalLetterToString()
+        );
+
+        /*$("#edtCapitalLetter").keyup(function(){
             regexCall(willRegEx.initialCapitalLetter($("#edtCapitalLetter").val()), "smlCapitalLetter");
         });
-        $("#expCapitalLetter").val(willRegEx.initialCapitalLetterToString());
+        $("#expCapitalLetter").val(willRegEx.initialCapitalLetterToString());*/
 
     });
 </script>
