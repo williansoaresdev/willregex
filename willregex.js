@@ -7,6 +7,7 @@ function WillRegEx() {
     /* Some necessary expressions */
     this.constants = {
         EMPTY_VALUE: 'Empty content. Type something',
+        NO_CAPITAL: 'Please begin the expression with capital letter',
         NO_ERROR: '',
         NO_NUMBERS: 'Only numbers from 0 to 9 was expected',
         NO_PROCCESS: 'Nothing processed',
@@ -15,6 +16,7 @@ function WillRegEx() {
 
     /* All the RegExp used */
     this.expressions = {
+        INITIAL_CAPITAL_LETTER: /^[A-Z]/,
         ONLY_NUMBERS: /[^0-9]/
     }
 
@@ -35,6 +37,30 @@ function WillRegEx() {
     /* Returns the last error found */
     this.getLastError = function() {
         return this.lastError;
+    }
+
+    /* INITIAL CAPITAL LETTER validation */
+    this.initialCapitalLetter = function(content) {
+        this.lastError = this.constants.NO_PROCCESS;
+
+        /* Check the is empty property */
+        if (this.failIfIsEmpty && (content == "")) {
+            this.lastError = this.constants.EMPTY_VALUE;
+            return false;
+        }
+
+        /* Check if the expression starts with capital letter */
+        this.matchResult = (this.expressions.INITIAL_CAPITAL_LETTER.test(content));
+
+        /* Apply the correct message error */
+        this.lastError = (this.matchResult) ? this.constants.NO_ERROR : this.constants.NO_CAPITAL;;
+
+        return this.matchResult;        
+    }
+
+    /* Returns the expression as a String */
+    this.initialCapitalLetterToString = function() {
+        return this.expressions.INITIAL_CAPITAL_LETTER.toString();
     }
 
     /* ONLY NUMBERS regexp validation */

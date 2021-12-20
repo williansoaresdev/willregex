@@ -16,10 +16,13 @@
 
 <div class="container">
     <h2>WillRegEx</h2>
+
     <div class="well">
         Welcome to my RegExp examples!<br />
         <small id="smlVersion"></small>
     </div>
+
+    <!-- Block por Only Numbers validation -->
     <div class="well">
         <div class="row">
             <div class="col-md-6">
@@ -31,6 +34,21 @@
         </div>
         <div>
             <small id="smlOnlyNumbers">Waiting...</small>
+        </div>
+    </div>
+
+    <!-- Block for Initial Capital Letter -->
+    <div class="well">
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" id="edtCapitalLetter" class="form-control" placeholder="Only initial capital letter here" />
+            </div>
+            <div class="col-md-6">
+                <input type="text" id="expCapitalLetter" disabled class="form-control" value="Code" />
+            </div>
+        </div>
+        <div>
+            <small id="smlCapitalLetter">Waiting...</small>
         </div>
     </div>
 </div>
@@ -53,6 +71,12 @@
             regexCall(willRegEx.onlyNumbers($("#edtOnlyNumbers").val()), "smlOnlyNumbers");
         });
         $("#expOnlyNumbers").val(willRegEx.onlyNumbersToString());
+
+        /* Prepare the initial capital letter validation */
+        $("#edtCapitalLetter").keyup(function(){
+            regexCall(willRegEx.initialCapitalLetter($("#edtCapitalLetter").val()), "smlCapitalLetter");
+        });
+        $("#expCapitalLetter").val(willRegEx.initialCapitalLetterToString());
 
     });
 </script>
