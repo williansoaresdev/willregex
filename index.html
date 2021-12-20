@@ -26,35 +26,6 @@
         <!-- The form inputs for validations will appear here -->
     </div>
 
-    <!-- Block por Only Numbers validation -->
-<!--    <div class="well">
-        <div class="row">
-            <div class="col-md-6">
-                <input type="text" id="edtOnlyNumbers" class="form-control" placeholder="Only numbers accepted here" />
-            </div>
-            <div class="col-md-6">
-                <input type="text" id="expOnlyNumbers" disabled class="form-control" value="Code" />
-            </div>
-        </div>
-        <div>
-            <small id="smlOnlyNumbers">Waiting...</small>
-        </div>
-    </div> -->
-
-    <!-- Block for Initial Capital Letter -->
-<!--    <div class="well">
-        <div class="row">
-            <div class="col-md-6">
-                <input type="text" id="edtCapitalLetter" class="form-control" placeholder="Only initial capital letter here" />
-            </div>
-            <div class="col-md-6">
-                <input type="text" id="expCapitalLetter" disabled class="form-control" value="Code" />
-            </div>
-        </div>
-        <div>
-            <small id="smlCapitalLetter">Waiting...</small>
-        </div>
-    </div> -->
 </div>
 
 <script>
@@ -100,24 +71,13 @@
           willRegEx.onlyNumbersToString()
         );
 
-
-        /*$("#edtOnlyNumbers").keyup(function(){
-            regexCall(willRegEx.onlyNumbers($("#edtOnlyNumbers").val()), "smlOnlyNumbers");
-        });
-        $("#expOnlyNumbers").val(willRegEx.onlyNumbersToString());*/
-
         /* Prepare the initial capital letter validation */
         buildNewInput("CapitalLetter", "Only initial capital letter here",
           function(){
-            regexCall(willRegEx.onlyNumbers($("#edtCapitalLetter").val()), "smlCapitalLetter");
+            regexCall(willRegEx.initialCapitalLetter($("#edtCapitalLetter").val()), "smlCapitalLetter");
           },
           willRegEx.initialCapitalLetterToString()
         );
-
-        /*$("#edtCapitalLetter").keyup(function(){
-            regexCall(willRegEx.initialCapitalLetter($("#edtCapitalLetter").val()), "smlCapitalLetter");
-        });
-        $("#expCapitalLetter").val(willRegEx.initialCapitalLetterToString());*/
 
     });
 </script>
